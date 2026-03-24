@@ -1,85 +1,120 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Menú Exámenes UNAM</title>
+<meta charset="UTF-8">
+<title>Plataforma UNAM</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            margin: 0;
-            padding: 20px;
-        }
+<style>
+body{
+    font-family:Arial;
+    background:#f4f6f8;
+    padding:20px;
+}
 
-        h1 {
-            text-align: center;
-        }
+h1{
+    text-align:center;
+}
 
-        .menu {
-            max-width: 700px;
-            margin: auto;
-        }
+.menu{
+    max-width:800px;
+    margin:auto;
+}
 
-        .unidad {
-            background: #2c3e50;
-            color: white;
-            padding: 15px;
-            cursor: pointer;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-size: 18px;
-        }
+.materia{
+    background:#34495e;
+    color:white;
+    padding:15px;
+    margin-top:10px;
+    border-radius:8px;
+    cursor:pointer;
+}
 
-        .subtemas {
-            background: #ecf0f1;
-            display: none;
-            padding: 10px 20px;
-            border-radius: 0 0 8px 8px;
-        }
+.unidad{
+    background:#2c3e50;
+    color:white;
+    padding:12px;
+    margin-top:5px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-left:15px;
+}
 
-        .subtemas p {
-            background: white;
-            padding: 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin: 8px 0;
-            transition: 0.2s;
-        }
+.temas{
+    display:none;
+    margin-left:30px;
+    background:#ecf0f1;
+    padding:10px;
+    border-radius:6px;
+}
 
-        .subtemas p:hover {
-            background: #dfe6e9;
-            transform: scale(1.02);
-        }
-    </style>
+.temas p{
+    background:white;
+    padding:10px;
+    border-radius:5px;
+    cursor:pointer;
+    margin:5px 0;
+}
+
+.temas p:hover{
+    background:#dfe6e9;
+}
+</style>
+
 </head>
 
 <body>
 
-<h1>Plataforma de Exámenes UNAM</h1>
+<h1>Simulador UNAM</h1>
 
 <div class="menu">
 
-    <!-- UNIDAD 1 -->
-    <div class="unidad" onclick="toggleMenu('u1')">
-        Unidad 1: Célula
+    <!-- BIOLOGÍA -->
+    <div class="materia" onclick="toggle('bio')">
+        Biología
     </div>
 
-    <div id="u1" class="subtemas">
-        <p onclick="irA('unidad1/teoria.html')">Teoría celular</p>
-        <p>Estructura celular</p>
-        <p>Examen Unidad 1</p>
+    <div id="bio" style="display:none">
+
+        <!-- UNIDAD 1 -->
+        <div class="unidad" onclick="toggle('bio_u1')">
+            Unidad 1: Célula
+        </div>
+
+        <div id="bio_u1" class="temas">
+            <p onclick="irA('biologia/unidad1/teoria.html')">Teoría celular</p>
+            <p>Estructura celular</p>
+            <p>Examen Unidad 1</p>
+        </div>
+
+    </div>
+
+    <!-- MATEMÁTICAS (placeholder) -->
+    <div class="materia" onclick="toggle('mate')">
+        Matemáticas
+    </div>
+
+    <div id="mate" style="display:none">
+        <div class="unidad">Próximamente</div>
+    </div>
+
+    <!-- FÍSICA (placeholder) -->
+    <div class="materia" onclick="toggle('fisica')">
+        Física
+    </div>
+
+    <div id="fisica" style="display:none">
+        <div class="unidad">Próximamente</div>
     </div>
 
 </div>
 
 <script>
-function toggleMenu(id) {
-    const elemento = document.getElementById(id);
-    elemento.style.display = elemento.style.display === "block" ? "none" : "block";
+function toggle(id){
+    const e = document.getElementById(id);
+    e.style.display = (e.style.display === "block") ? "none" : "block";
 }
 
-function irA(ruta) {
+function irA(ruta){
     window.location.href = ruta;
 }
 </script>
