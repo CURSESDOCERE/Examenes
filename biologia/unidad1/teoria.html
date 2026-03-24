@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Examen Teoría Celular</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+body{font-family:Arial;background:#f4f4f4;text-align:center}
+.container{background:#fff;padding:20px;margin:20px auto;width:80%;border-radius:10px}
+.timer{font-size:20px;color:red}
+button{padding:10px 20px;margin-top:20px}
+.pregunta{text-align:left;margin-bottom:15px}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="inicio">
+<h2>Examen Unidad 1 - Teoría Celular</h2>
+<input type="text" id="nombre" placeholder="Nombre"><br><br>
+<input type="text" id="cuenta" placeholder="Número de cuenta"><br><br>
+<button onclick="iniciarExamen()">Iniciar Examen</button>
+</div>
+
+<div class="container" id="examen" style="display:none">
+<div class="timer" id="timer"></div>
+<form id="formulario"></form>
+<button onclick="finalizarExamen()">Finalizar</button>
+</div>
+
+<div class="container" id="resultado" style="display:none"></div>
+
+<script>
+
+// RESPUESTAS CORRECTAS
+const respuestasCorrectas = [
+"B","B","B","B","C","B","B","C","C","C",
+"C","C","C","C","B","B","B","C","B","B",
+"C","C","B","B","C"
+];
+
+// PREGUNTAS + OPCIONES
+const preguntas = [
+{
+t:"La teoría celular establece que:",
+o:["Los órganos forman células","La célula es la unidad básica de la vida","Los tejidos son independientes","El ADN forma células"]
+},
+{
+t:"¿Quiénes propusieron la teoría celular?",
+o:["Darwin y Mendel","Schleiden y Schwann","Hooke y Newton","Pasteur y Lamarck"]
+},
+{
+t:"¿Quién estableció que toda célula proviene de otra célula?",
+o:["Hooke","Virchow","Darwin","Leeuwenhoek"]
+},
+{
+t:"¿Qué científico observó por primera vez células en el corcho?",
+o:["Schwann","Hooke","Pasteur","Mendel"]
+},
+{
+t:"La célula es considerada unidad estructural porque:",
+o:["Forma órganos","Tiene ADN","Es la base de la estructura de los seres vivos","Produce energía"]
+},
+{
+t:"La célula es unidad funcional porque:",
+o:["Forma tejidos","Realiza funciones vitales","Contiene núcleo","Tiene membrana"]
+},
+{
+t:"¿Cuál es un postulado de la teoría celular?",
+o:["Las células se forman espontáneamente","Todos los seres vivos están formados por células","Solo los animales tienen células","Las células no tienen funciones"]
+},
+{
+t:"¿Cuál afirmación es correcta sobre las células?",
+o:["No contienen información genética","Son iguales en todos los organismos","Provienen de células preexistentes","No realizan metabolismo"]
+},
+{
+t:"¿Qué característica comparten todas las células?",
+o:["Núcleo","Mitocondria","Membrana plasmática","Cloroplastos"]
+},
+{
+t:"¿Cuál es la función principal del ADN en la célula?",
+o:["Producir energía","Formar membrana","Almacenar información genética","Transportar sustancias"]
+},
+{
+t:"Las células procariotas se caracterizan por:",
+o:["Tener núcleo definido","Ser complejas","Carecer de núcleo definido","Tener organelos membranosos"]
+},
+{
+t:"Las células eucariotas se caracterizan por:",
+o:["No tener ADN","Ser simples","Tener núcleo definido","Carecer de membrana"]
+},
+{
+t:"¿Cuál organismo es unicelular?",
+o:["Humano","Árbol","Bacteria","Hongo multicelular"]
+},
+{
+t:"El metabolismo celular ocurre en:",
+o:["Solo en tejidos","Solo en órganos","Dentro de las células","Solo en el núcleo"]
+},
+{
+t:"La teoría celular moderna establece que:",
+o:["Las células no contienen ADN","Todas las células tienen composición química similar","Solo algunas células tienen funciones","Las células no evolucionan"]
+},
+{
+t:"¿Qué instrumento permitió el descubrimiento de la célula?",
+o:["Telescopio","Microscopio","Termómetro","Barómetro"]
+},
+{
+t:"¿Quién perfeccionó el microscopio?",
+o:["Hooke","Leeuwenhoek","Darwin","Mendel"]
+},
+{
+t:"Característica de todos los seres vivos:",
+o:["Tienen órganos","Tienen tejidos","Están formados por células","Son pluricelulares"]
+},
+{
+t:"¿Qué estructura delimita la célula?",
+o:["Núcleo","Membrana plasmática","ADN","Citoplasma"]
+},
+{
+t:"Tipo de célula más simple:",
+o:["Eucariota","Procariota","Animal","Vegetal"]
+},
+{
+t:"¿Qué tienen en común animal y vegetal?",
+o:["Pared celular","Cloroplastos","Membrana plasmática","Vacuola grande"]
+},
+{
+t:"¿Cuál afirmación es incorrecta?",
+o:["Todas las células provienen de otras células","La célula es unidad funcional","Las células surgen espontáneamente","Todos los seres vivos tienen células"]
+},
+{
+t:"¿Qué ocurre dentro de la célula?",
+o:["Solo transporte","Reacciones químicas vitales","Solo reproducción","Solo almacenamiento"]
+},
+{
+t:"Importancia de la teoría celular:",
+o:["Explica los tejidos","Explica la vida a nivel celular","Explica los órganos","Explica la física"]
+},
+{
+t:"Base de la organización biológica:",
+o:["Átomo","Molécula","Célula","Tejido"]
+}
+];
+
+let tiempoTotal = 65 * preguntas.length;
+let intervalo;
+
+function iniciarExamen(){
+const nombre = document.getElementById('nombre').value;
+const cuenta = document.getElementById('cuenta').value;
+
+if(!nombre || !cuenta){
+alert("Completa tus datos");
+return;
+}
+
+localStorage.setItem('nombre', nombre);
+localStorage.setItem('cuenta', cuenta);
+
+let html = "";
+
+preguntas.forEach((p, i)=>{
+html += `<div class="pregunta"><p>${i+1}. ${p.t}</p>`;
+p.o.forEach((op, j)=>{
+let letra = ["A","B","C","D"][j];
+html += `<label><input type="radio" name="p${i}" value="${letra}"> ${letra}) ${op}</label><br>`;
+});
+html += `</div>`;
+});
+
+document.getElementById('formulario').innerHTML = html;
+
+document.getElementById('inicio').style.display='none';
+document.getElementById('examen').style.display='block';
+
+iniciarTimer();
+}
+
+function iniciarTimer(){
+intervalo = setInterval(()=>{
+tiempoTotal--;
+let min = Math.floor(tiempoTotal/60);
+let seg = tiempoTotal%60;
+
+document.getElementById('timer').innerText =
+`Tiempo: ${min}:${seg<10?'0':''}${seg}`;
+
+if(tiempoTotal<=0){
+clearInterval(intervalo);
+finalizarExamen();
+}
+},1000);
+}
+
+function finalizarExamen(){
+clearInterval(intervalo);
+
+let aciertos = 0;
+let respuestas = [];
+
+preguntas.forEach((_,i)=>{
+let r = document.querySelector(`input[name='p${i}']:checked`);
+let val = r ? r.value : "-";
+respuestas.push(val);
+
+if(val === respuestasCorrectas[i]) aciertos++;
+});
+
+let calificacion = (aciertos/preguntas.length)*10;
+
+let nombre = localStorage.getItem('nombre');
+let cuenta = localStorage.getItem('cuenta');
+let fecha = new Date().toLocaleString();
+
+document.getElementById('examen').style.display='none';
+document.getElementById('resultado').style.display='block';
+
+document.getElementById('resultado').innerHTML = `
+<h2>Resultado</h2>
+<p>Nombre: ${nombre}</p>
+<p>Cuenta: ${cuenta}</p>
+<p>Fecha: ${fecha}</p>
+<p>Calificación: ${calificacion.toFixed(2)}</p>
+<button onclick='descargarPDF(${JSON.stringify(respuestas)}, ${calificacion})'>
+Descargar PDF
+</button>
+`;
+}
+
+function descargarPDF(respuestas, calificacion){
+const { jsPDF } = window.jspdf;
+const doc = new jsPDF();
+
+let nombre = localStorage.getItem('nombre');
+let cuenta = localStorage.getItem('cuenta');
+let fecha = new Date().toLocaleString();
+
+let y = 10;
+
+doc.text(`Nombre: ${nombre}`,10,y); y+=10;
+doc.text(`Cuenta: ${cuenta}`,10,y); y+=10;
+doc.text(`Fecha: ${fecha}`,10,y); y+=10;
+doc.text(`Calificación: ${calificacion.toFixed(2)}`,10,y); y+=10;
+
+respuestas.forEach((r,i)=>{
+doc.text(`${i+1}. ${r}`,10,y);
+y+=8;
+if(y>280){doc.addPage(); y=10;}
+});
+
+doc.save("resultado.pdf");
+}
+
+</script>
+
+</body>
+</html>
