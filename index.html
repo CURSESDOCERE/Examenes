@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Simulador UNAM</title>
+
+<style>
+body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+
+.card {
+    background: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.card:hover {
+    background: #e0f7fa;
+}
+</style>
+
+</head>
+<body>
+
+<h1>Simulador UNAM</h1>
+
+<div id="app">Cargando cuestionarios...</div>
+
+<script>
+fetch("cuestionarios.json")
+.then(res => res.json())
+.then(data => {
+    let html = "";
+
+    for (let materia in data) {
+        html += `<h2>${materia}</h2>`;
+
+        data[materia].forEach(q => {
+            html += `
+            <div class="card" onclick="window.location.href='${q.archivo}'">
+                ${q.nombre}
+            </div>`;
+        });
+    }
+
+    document.getElementById("app").innerHTML = html;
+})
+.catch(err => {
+    document.getElementById("app").innerHTML = "Error cargando cuestionarios";
+});
+</script>
+
+</body>
+</html>
