@@ -34,115 +34,40 @@ button{padding:10px 20px;margin-top:20px}
 
 <script>
 
-// RESPUESTAS CORRECTAS
+// RESPUESTAS
 const respuestasCorrectas = [
 "B","B","B","B","C","B","B","C","C","C",
 "C","C","C","C","B","B","B","C","B","B",
 "C","C","B","B","C"
 ];
 
-// PREGUNTAS + OPCIONES
+// PREGUNTAS
 const preguntas = [
-{
-t:"La teoría celular establece que:",
-o:["Los órganos forman células","La célula es la unidad básica de la vida","Los tejidos son independientes","El ADN forma células"]
-},
-{
-t:"¿Quiénes propusieron la teoría celular?",
-o:["Darwin y Mendel","Schleiden y Schwann","Hooke y Newton","Pasteur y Lamarck"]
-},
-{
-t:"¿Quién estableció que toda célula proviene de otra célula?",
-o:["Hooke","Virchow","Darwin","Leeuwenhoek"]
-},
-{
-t:"¿Qué científico observó por primera vez células en el corcho?",
-o:["Schwann","Hooke","Pasteur","Mendel"]
-},
-{
-t:"La célula es considerada unidad estructural porque:",
-o:["Forma órganos","Tiene ADN","Es la base de la estructura de los seres vivos","Produce energía"]
-},
-{
-t:"La célula es unidad funcional porque:",
-o:["Forma tejidos","Realiza funciones vitales","Contiene núcleo","Tiene membrana"]
-},
-{
-t:"¿Cuál es un postulado de la teoría celular?",
-o:["Las células se forman espontáneamente","Todos los seres vivos están formados por células","Solo los animales tienen células","Las células no tienen funciones"]
-},
-{
-t:"¿Cuál afirmación es correcta sobre las células?",
-o:["No contienen información genética","Son iguales en todos los organismos","Provienen de células preexistentes","No realizan metabolismo"]
-},
-{
-t:"¿Qué característica comparten todas las células?",
-o:["Núcleo","Mitocondria","Membrana plasmática","Cloroplastos"]
-},
-{
-t:"¿Cuál es la función principal del ADN en la célula?",
-o:["Producir energía","Formar membrana","Almacenar información genética","Transportar sustancias"]
-},
-{
-t:"Las células procariotas se caracterizan por:",
-o:["Tener núcleo definido","Ser complejas","Carecer de núcleo definido","Tener organelos membranosos"]
-},
-{
-t:"Las células eucariotas se caracterizan por:",
-o:["No tener ADN","Ser simples","Tener núcleo definido","Carecer de membrana"]
-},
-{
-t:"¿Cuál organismo es unicelular?",
-o:["Humano","Árbol","Bacteria","Hongo multicelular"]
-},
-{
-t:"El metabolismo celular ocurre en:",
-o:["Solo en tejidos","Solo en órganos","Dentro de las células","Solo en el núcleo"]
-},
-{
-t:"La teoría celular moderna establece que:",
-o:["Las células no contienen ADN","Todas las células tienen composición química similar","Solo algunas células tienen funciones","Las células no evolucionan"]
-},
-{
-t:"¿Qué instrumento permitió el descubrimiento de la célula?",
-o:["Telescopio","Microscopio","Termómetro","Barómetro"]
-},
-{
-t:"¿Quién perfeccionó el microscopio?",
-o:["Hooke","Leeuwenhoek","Darwin","Mendel"]
-},
-{
-t:"Característica de todos los seres vivos:",
-o:["Tienen órganos","Tienen tejidos","Están formados por células","Son pluricelulares"]
-},
-{
-t:"¿Qué estructura delimita la célula?",
-o:["Núcleo","Membrana plasmática","ADN","Citoplasma"]
-},
-{
-t:"Tipo de célula más simple:",
-o:["Eucariota","Procariota","Animal","Vegetal"]
-},
-{
-t:"¿Qué tienen en común animal y vegetal?",
-o:["Pared celular","Cloroplastos","Membrana plasmática","Vacuola grande"]
-},
-{
-t:"¿Cuál afirmación es incorrecta?",
-o:["Todas las células provienen de otras células","La célula es unidad funcional","Las células surgen espontáneamente","Todos los seres vivos tienen células"]
-},
-{
-t:"¿Qué ocurre dentro de la célula?",
-o:["Solo transporte","Reacciones químicas vitales","Solo reproducción","Solo almacenamiento"]
-},
-{
-t:"Importancia de la teoría celular:",
-o:["Explica los tejidos","Explica la vida a nivel celular","Explica los órganos","Explica la física"]
-},
-{
-t:"Base de la organización biológica:",
-o:["Átomo","Molécula","Célula","Tejido"]
-}
+{t:"La teoría celular establece que:",o:["Los órganos forman células","La célula es la unidad básica de la vida","Los tejidos son independientes","El ADN forma células"]},
+{t:"¿Quiénes propusieron la teoría celular?",o:["Darwin y Mendel","Schleiden y Schwann","Hooke y Newton","Pasteur y Lamarck"]},
+{t:"¿Quién estableció que toda célula proviene de otra célula?",o:["Hooke","Virchow","Darwin","Leeuwenhoek"]},
+{t:"¿Qué científico observó por primera vez células en el corcho?",o:["Schwann","Hooke","Pasteur","Mendel"]},
+{t:"La célula es considerada unidad estructural porque:",o:["Forma órganos","Tiene ADN","Es la base de la estructura de los seres vivos","Produce energía"]},
+{t:"La célula es unidad funcional porque:",o:["Forma tejidos","Realiza funciones vitales","Contiene núcleo","Tiene membrana"]},
+{t:"¿Cuál es un postulado de la teoría celular?",o:["Las células se forman espontáneamente","Todos los seres vivos están formados por células","Solo los animales tienen células","Las células no tienen funciones"]},
+{t:"¿Cuál afirmación es correcta sobre las células?",o:["No contienen información genética","Son iguales en todos los organismos","Provienen de células preexistentes","No realizan metabolismo"]},
+{t:"¿Qué característica comparten todas las células?",o:["Núcleo","Mitocondria","Membrana plasmática","Cloroplastos"]},
+{t:"¿Cuál es la función principal del ADN en la célula?",o:["Producir energía","Formar membrana","Almacenar información genética","Transportar sustancias"]},
+{t:"Las células procariotas se caracterizan por:",o:["Tener núcleo definido","Ser complejas","Carecer de núcleo definido","Tener organelos membranosos"]},
+{t:"Las células eucariotas se caracterizan por:",o:["No tener ADN","Ser simples","Tener núcleo definido","Carecer de membrana"]},
+{t:"¿Cuál organismo es unicelular?",o:["Humano","Árbol","Bacteria","Hongo multicelular"]},
+{t:"El metabolismo celular ocurre en:",o:["Solo en tejidos","Solo en órganos","Dentro de las células","Solo en el núcleo"]},
+{t:"La teoría celular moderna establece que:",o:["Las células no contienen ADN","Todas las células tienen composición química similar","Solo algunas células tienen funciones","Las células no evolucionan"]},
+{t:"¿Qué instrumento permitió el descubrimiento de la célula?",o:["Telescopio","Microscopio","Termómetro","Barómetro"]},
+{t:"¿Quién perfeccionó el microscopio?",o:["Hooke","Leeuwenhoek","Darwin","Mendel"]},
+{t:"Característica de todos los seres vivos:",o:["Tienen órganos","Tienen tejidos","Están formados por células","Son pluricelulares"]},
+{t:"¿Qué estructura delimita la célula?",o:["Núcleo","Membrana plasmática","ADN","Citoplasma"]},
+{t:"Tipo de célula más simple:",o:["Eucariota","Procariota","Animal","Vegetal"]},
+{t:"¿Qué tienen en común animal y vegetal?",o:["Pared celular","Cloroplastos","Membrana plasmática","Vacuola grande"]},
+{t:"¿Cuál afirmación es incorrecta?",o:["Todas las células provienen de otras células","La célula es unidad funcional","Las células surgen espontáneamente","Todos los seres vivos tienen células"]},
+{t:"¿Qué ocurre dentro de la célula?",o:["Solo transporte","Reacciones químicas vitales","Solo reproducción","Solo almacenamiento"]},
+{t:"Importancia de la teoría celular:",o:["Explica los tejidos","Explica la vida a nivel celular","Explica los órganos","Explica la física"]},
+{t:"Base de la organización biológica:",o:["Átomo","Molécula","Célula","Tejido"]}
 ];
 
 let tiempoTotal = 65 * preguntas.length;
@@ -162,9 +87,9 @@ localStorage.setItem('cuenta', cuenta);
 
 let html = "";
 
-preguntas.forEach((p, i)=>{
+preguntas.forEach((p,i)=>{
 html += `<div class="pregunta"><p>${i+1}. ${p.t}</p>`;
-p.o.forEach((op, j)=>{
+p.o.forEach((op,j)=>{
 let letra = ["A","B","C","D"][j];
 html += `<label><input type="radio" name="p${i}" value="${letra}"> ${letra}) ${op}</label><br>`;
 });
@@ -214,6 +139,20 @@ let calificacion = (aciertos/preguntas.length)*10;
 let nombre = localStorage.getItem('nombre');
 let cuenta = localStorage.getItem('cuenta');
 let fecha = new Date().toLocaleString();
+
+// 🔥 ENVÍO A GOOGLE SHEETS
+fetch("https://script.google.com/macros/s/AKfycbyUqcbrxDYZuyBZxYYJ2BXbLYN7Ojug7yLLRetPMsDnVU-pb_ufvRXX93cg8r6CDkDT/exec", {
+    method: "POST",
+    body: JSON.stringify({
+        nombre: nombre,
+        cuenta: cuenta,
+        materia: "Biología",
+        unidad: "Unidad 1",
+        tema: "Teoría celular",
+        calificacion: calificacion.toFixed(2),
+        fecha: fecha
+    })
+});
 
 document.getElementById('examen').style.display='none';
 document.getElementById('resultado').style.display='block';
