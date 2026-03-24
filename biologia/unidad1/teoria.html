@@ -143,6 +143,10 @@ let fecha = new Date().toLocaleString();
 // 🔥 ENVÍO A GOOGLE SHEETS
 fetch("https://script.google.com/macros/s/AKfycbyUqcbrxDYZuyBZxYYJ2BXbLYN7Ojug7yLLRetPMsDnVU-pb_ufvRXX93cg8r6CDkDT/exec", {
     method: "POST",
+    mode: "no-cors", // 🔥 CLAVE
+    headers: {
+        "Content-Type": "application/json"
+    },
     body: JSON.stringify({
         nombre: nombre,
         cuenta: cuenta,
