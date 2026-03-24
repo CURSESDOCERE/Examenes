@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Plataforma UNAM</title>
+<title>Simulador UNAM</title>
 
 <style>
 body{
@@ -16,7 +16,7 @@ h1{
 }
 
 .menu{
-    max-width:800px;
+    max-width:900px;
     margin:auto;
 }
 
@@ -68,43 +68,114 @@ h1{
 
 <div class="menu">
 
-    <!-- BIOLOGÍA -->
-    <div class="materia" onclick="toggle('bio')">
-        Biología
+<!-- ================= BIOLOGÍA ================= -->
+<div class="materia" onclick="toggle('bio')">Biología</div>
+<div id="bio" style="display:none">
+
+    <div class="unidad" onclick="toggle('bio_u1')">Unidad 1: Célula</div>
+    <div id="bio_u1" class="temas">
+        <p onclick="irA('biologia/unidad1/teoria.html')">Teoría celular</p>
+        <p>Estructura celular</p>
+        <p>Examen Unidad 1</p>
     </div>
 
-    <div id="bio" style="display:none">
-
-        <!-- UNIDAD 1 -->
-        <div class="unidad" onclick="toggle('bio_u1')">
-            Unidad 1: Célula
-        </div>
-
-        <div id="bio_u1" class="temas">
-            <p onclick="irA('biologia/unidad1/teoria.html')">Teoría celular</p>
-            <p>Estructura celular</p>
-            <p>Examen Unidad 1</p>
-        </div>
-
+    <div class="unidad" onclick="toggle('bio_u2')">Unidad 2: Metabolismo</div>
+    <div id="bio_u2" class="temas">
+        <p>Fotosíntesis</p>
+        <p>Respiración celular</p>
     </div>
 
-    <!-- MATEMÁTICAS (placeholder) -->
-    <div class="materia" onclick="toggle('mate')">
-        Matemáticas
+</div>
+
+<!-- ================= MATEMÁTICAS ================= -->
+<div class="materia" onclick="toggle('mate')">Matemáticas</div>
+<div id="mate" style="display:none">
+
+    <div class="unidad" onclick="toggle('mate_u1')">Unidad 1: Álgebra</div>
+    <div id="mate_u1" class="temas">
+        <p>Expresiones algebraicas</p>
+        <p>Ecuaciones</p>
     </div>
 
-    <div id="mate" style="display:none">
-        <div class="unidad">Próximamente</div>
+    <div class="unidad" onclick="toggle('mate_u2')">Unidad 2: Geometría</div>
+    <div id="mate_u2" class="temas">
+        <p>Ángulos</p>
+        <p>Triángulos</p>
     </div>
 
-    <!-- FÍSICA (placeholder) -->
-    <div class="materia" onclick="toggle('fisica')">
-        Física
+</div>
+
+<!-- ================= FÍSICA ================= -->
+<div class="materia" onclick="toggle('fisica')">Física</div>
+<div id="fisica" style="display:none">
+
+    <div class="unidad" onclick="toggle('fis_u1')">Unidad 1: Cinemática</div>
+    <div id="fis_u1" class="temas">
+        <p>Movimiento rectilíneo</p>
+        <p>Velocidad y aceleración</p>
     </div>
 
-    <div id="fisica" style="display:none">
-        <div class="unidad">Próximamente</div>
+</div>
+
+<!-- ================= QUÍMICA ================= -->
+<div class="materia" onclick="toggle('quimica')">Química</div>
+<div id="quimica" style="display:none">
+
+    <div class="unidad" onclick="toggle('qui_u1')">Unidad 1: Estructura de la materia</div>
+    <div id="qui_u1" class="temas">
+        <p>Átomo</p>
+        <p>Tabla periódica</p>
     </div>
+
+</div>
+
+<!-- ================= ESPAÑOL ================= -->
+<div class="materia" onclick="toggle('esp')">Español</div>
+<div id="esp" style="display:none">
+
+    <div class="unidad" onclick="toggle('esp_u1')">Comprensión lectora</div>
+    <div id="esp_u1" class="temas">
+        <p>Textos narrativos</p>
+        <p>Inferencias</p>
+    </div>
+
+</div>
+
+<!-- ================= HISTORIA ================= -->
+<div class="materia" onclick="toggle('hist')">Historia</div>
+<div id="hist" style="display:none">
+
+    <div class="unidad" onclick="toggle('hist_u1')">México</div>
+    <div id="hist_u1" class="temas">
+        <p>Independencia</p>
+        <p>Revolución</p>
+    </div>
+
+</div>
+
+<!-- ================= GEOGRAFÍA ================= -->
+<div class="materia" onclick="toggle('geo')">Geografía</div>
+<div id="geo" style="display:none">
+
+    <div class="unidad" onclick="toggle('geo_u1')">Física</div>
+    <div id="geo_u1" class="temas">
+        <p>Relieve</p>
+        <p>Climas</p>
+    </div>
+
+</div>
+
+<!-- ================= FORMACIÓN CÍVICA ================= -->
+<div class="materia" onclick="toggle('civica')">Formación Cívica</div>
+<div id="civica" style="display:none">
+
+    <div class="unidad" onclick="toggle('civ_u1')">Valores</div>
+    <div id="civ_u1" class="temas">
+        <p>Derechos humanos</p>
+        <p>Ciudadanía</p>
+    </div>
+
+</div>
 
 </div>
 
