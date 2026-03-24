@@ -1,52 +1,62 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<title>Simulador UNAM</title>
+<!DOCTYPE html> <!-- Define que el documento es HTML5 -->
 
-<style>
+<html lang="es"> <!-- Indica que el idioma es español -->
+
+<head> <!-- Inicio de la configuración del documento -->
+<meta charset="UTF-8"> <!-- Permite usar acentos y caracteres especiales -->
+<title>Simulador UNAM</title> <!-- Título que aparece en la pestaña -->
+
+<style> /* Inicio de estilos CSS */
+
+/* Estilo general del cuerpo */
 body{
-    font-family:Arial;
-    background:#f4f6f8;
-    padding:20px;
+    font-family:Arial; /* Tipo de letra */
+    background:#f4f6f8; /* Color de fondo */
+    padding:20px; /* Espacio interno */
 }
 
+/* Título principal */
 h1{
-    text-align:center;
+    text-align:center; /* Centrar texto */
 }
 
+/* Contenedor del menú */
 .menu{
-    max-width:900px;
-    margin:auto;
+    max-width:900px; /* Ancho máximo */
+    margin:auto; /* Centra el menú */
 }
 
+/* Botón de cada materia */
 .materia{
-    background:#34495e;
-    color:white;
-    padding:15px;
-    margin-top:10px;
-    border-radius:8px;
-    cursor:pointer;
+    background:#34495e; /* Color oscuro */
+    color:white; /* Texto blanco */
+    padding:15px; /* Espacio interno */
+    margin-top:10px; /* Separación entre materias */
+    border-radius:8px; /* Bordes redondeados */
+    cursor:pointer; /* Cambia el cursor al pasar */
 }
 
+/* Botón de cada unidad */
 .unidad{
-    background:#2c3e50;
+    background:#2c3e50; /* Color un poco más oscuro */
     color:white;
     padding:12px;
     margin-top:5px;
     border-radius:6px;
     cursor:pointer;
-    margin-left:15px;
+    margin-left:15px; /* Se recorre a la derecha */
 }
 
+/* Contenedor de los temas */
 .temas{
-    display:none;
-    margin-left:30px;
+    display:none; /* Oculto por defecto */
+    margin-left:30px; /* Más desplazado a la derecha */
     background:#ecf0f1;
     padding:10px;
     border-radius:6px;
 }
 
+/* Cada tema individual */
 .temas p{
     background:white;
     padding:10px;
@@ -55,31 +65,52 @@ h1{
     margin:5px 0;
 }
 
+/* Efecto al pasar el mouse */
 .temas p:hover{
     background:#dfe6e9;
 }
-</style>
 
+</style>
 </head>
 
 <body>
 
-<h1>Simulador UNAM</h1>
+<h1>Simulador UNAM</h1> <!-- Título visible -->
 
-<div class="menu">
+<div class="menu"> <!-- Contenedor principal -->
 
 <!-- ================= BIOLOGÍA ================= -->
-<div class="materia" onclick="toggle('bio')">Biología</div>
+
+<div class="materia" onclick="toggle('bio')">
+    Biología <!-- Texto de la materia -->
+</div>
+
+<!-- Contenedor de unidades de Biología -->
 <div id="bio" style="display:none">
 
-    <div class="unidad" onclick="toggle('bio_u1')">Unidad 1: Célula</div>
-    <div id="bio_u1" class="temas">
-        <p onclick="irA('biologia/unidad1/teoria.html')">Teoría celular</p>
-        <p>Estructura celular</p>
-        <p>Examen Unidad 1</p>
+    <!-- Unidad 1 -->
+    <div class="unidad" onclick="toggle('bio_u1')">
+        Unidad 1: Célula
     </div>
 
-    <div class="unidad" onclick="toggle('bio_u2')">Unidad 2: Metabolismo</div>
+    <!-- Temas de la unidad -->
+    <div id="bio_u1" class="temas">
+
+        <!-- Al hacer clic redirige al examen -->
+        <p onclick="irA('biologia/unidad1/teoria.html')">
+            Teoría celular
+        </p>
+
+        <p>Estructura celular</p>
+        <p>Examen Unidad 1</p>
+
+    </div>
+
+    <!-- Unidad 2 -->
+    <div class="unidad" onclick="toggle('bio_u2')">
+        Unidad 2: Metabolismo
+    </div>
+
     <div id="bio_u2" class="temas">
         <p>Fotosíntesis</p>
         <p>Respiración celular</p>
@@ -88,28 +119,36 @@ h1{
 </div>
 
 <!-- ================= MATEMÁTICAS ================= -->
-<div class="materia" onclick="toggle('mate')">Matemáticas</div>
+
+<div class="materia" onclick="toggle('mate')">
+    Matemáticas
+</div>
+
 <div id="mate" style="display:none">
 
-    <div class="unidad" onclick="toggle('mate_u1')">Unidad 1: Álgebra</div>
+    <div class="unidad" onclick="toggle('mate_u1')">
+        Unidad 1: Álgebra
+    </div>
+
     <div id="mate_u1" class="temas">
         <p>Expresiones algebraicas</p>
         <p>Ecuaciones</p>
     </div>
 
-    <div class="unidad" onclick="toggle('mate_u2')">Unidad 2: Geometría</div>
-    <div id="mate_u2" class="temas">
-        <p>Ángulos</p>
-        <p>Triángulos</p>
-    </div>
-
 </div>
 
 <!-- ================= FÍSICA ================= -->
-<div class="materia" onclick="toggle('fisica')">Física</div>
+
+<div class="materia" onclick="toggle('fisica')">
+    Física
+</div>
+
 <div id="fisica" style="display:none">
 
-    <div class="unidad" onclick="toggle('fis_u1')">Unidad 1: Cinemática</div>
+    <div class="unidad" onclick="toggle('fis_u1')">
+        Unidad 1: Cinemática
+    </div>
+
     <div id="fis_u1" class="temas">
         <p>Movimiento rectilíneo</p>
         <p>Velocidad y aceleración</p>
@@ -118,10 +157,17 @@ h1{
 </div>
 
 <!-- ================= QUÍMICA ================= -->
-<div class="materia" onclick="toggle('quimica')">Química</div>
+
+<div class="materia" onclick="toggle('quimica')">
+    Química
+</div>
+
 <div id="quimica" style="display:none">
 
-    <div class="unidad" onclick="toggle('qui_u1')">Unidad 1: Estructura de la materia</div>
+    <div class="unidad" onclick="toggle('qui_u1')">
+        Unidad 1: Estructura de la materia
+    </div>
+
     <div id="qui_u1" class="temas">
         <p>Átomo</p>
         <p>Tabla periódica</p>
@@ -130,10 +176,17 @@ h1{
 </div>
 
 <!-- ================= ESPAÑOL ================= -->
-<div class="materia" onclick="toggle('esp')">Español</div>
+
+<div class="materia" onclick="toggle('esp')">
+    Español
+</div>
+
 <div id="esp" style="display:none">
 
-    <div class="unidad" onclick="toggle('esp_u1')">Comprensión lectora</div>
+    <div class="unidad" onclick="toggle('esp_u1')">
+        Comprensión lectora
+    </div>
+
     <div id="esp_u1" class="temas">
         <p>Textos narrativos</p>
         <p>Inferencias</p>
@@ -142,10 +195,17 @@ h1{
 </div>
 
 <!-- ================= HISTORIA ================= -->
-<div class="materia" onclick="toggle('hist')">Historia</div>
+
+<div class="materia" onclick="toggle('hist')">
+    Historia
+</div>
+
 <div id="hist" style="display:none">
 
-    <div class="unidad" onclick="toggle('hist_u1')">México</div>
+    <div class="unidad" onclick="toggle('hist_u1')">
+        México
+    </div>
+
     <div id="hist_u1" class="temas">
         <p>Independencia</p>
         <p>Revolución</p>
@@ -154,10 +214,17 @@ h1{
 </div>
 
 <!-- ================= GEOGRAFÍA ================= -->
-<div class="materia" onclick="toggle('geo')">Geografía</div>
+
+<div class="materia" onclick="toggle('geo')">
+    Geografía
+</div>
+
 <div id="geo" style="display:none">
 
-    <div class="unidad" onclick="toggle('geo_u1')">Física</div>
+    <div class="unidad" onclick="toggle('geo_u1')">
+        Física
+    </div>
+
     <div id="geo_u1" class="temas">
         <p>Relieve</p>
         <p>Climas</p>
@@ -166,10 +233,17 @@ h1{
 </div>
 
 <!-- ================= FORMACIÓN CÍVICA ================= -->
-<div class="materia" onclick="toggle('civica')">Formación Cívica</div>
+
+<div class="materia" onclick="toggle('civica')">
+    Formación Cívica
+</div>
+
 <div id="civica" style="display:none">
 
-    <div class="unidad" onclick="toggle('civ_u1')">Valores</div>
+    <div class="unidad" onclick="toggle('civ_u1')">
+        Valores
+    </div>
+
     <div id="civ_u1" class="temas">
         <p>Derechos humanos</p>
         <p>Ciudadanía</p>
@@ -177,17 +251,23 @@ h1{
 
 </div>
 
-</div>
+</div> <!-- Fin del menú -->
 
 <script>
+
+/* Función para abrir/cerrar secciones */
 function toggle(id){
-    const e = document.getElementById(id);
+    const e = document.getElementById(id); // Busca el elemento por ID
+
+    // Si está abierto lo cierra, si está cerrado lo abre
     e.style.display = (e.style.display === "block") ? "none" : "block";
 }
 
+/* Función para cambiar de página */
 function irA(ruta){
-    window.location.href = ruta;
+    window.location.href = ruta; // Redirige al archivo indicado
 }
+
 </script>
 
 </body>
