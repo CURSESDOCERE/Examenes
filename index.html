@@ -1,55 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Simulador UNAM</title>
+    <meta charset="UTF-8">
+    <title>Menú Exámenes UNAM</title>
 
-<style>
-body { font-family: Arial; padding: 20px; background: #f4f4f4; }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
 
-.card {
-    background: white;
-    padding: 15px;
-    margin: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-}
+        h1 {
+            text-align: center;
+        }
 
-.card:hover {
-    background: #e0f7fa;
-}
-</style>
+        .menu {
+            max-width: 600px;
+            margin: auto;
+        }
 
+        .unidad {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .subtemas {
+            background-color: #ecf0f1;
+            padding: 10px 20px;
+            display: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .subtemas p {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .subtemas p:hover {
+            background-color: #dfe6e9;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>Simulador UNAM</h1>
+    <h1>Exámenes UNAM</h1>
 
-<div id="app">Cargando cuestionarios...</div>
+    <div class="menu">
 
-<script>
-fetch("cuestionarios.json")
-.then(res => res.json())
-.then(data => {
-    let html = "";
+        <!-- Unidad 1 -->
+        <div class="unidad" onclick="toggleMenu('unidad1')">
+            Unidad 1: Célula
+        </div>
 
-    for (let materia in data) {
-        html += `<h2>${materia}</h2>`;
+        <div id="unidad1" class="subtemas">
+            <p>Teoría celular</p>
+            <p>Estructura celular</p>
+            <p>Examen Unidad 1</p>
+        </div>
 
-        data[materia].forEach(q => {
-            html += `
-            <div class="card" onclick="window.location.href='${q.archivo}'">
-                ${q.nombre}
-            </div>`;
-        });
-    }
+    </div>
 
-    document.getElementById("app").innerHTML = html;
-})
-.catch(err => {
-    document.getElementById("app").innerHTML = "Error cargando cuestionarios";
-});
-</script>
+    <script>
+        function toggleMenu(id) {
+            const elemento = document.getElementById(id);
+
+            if (elemento.style.display === "block") {
+                elemento.style.display = "none";
+            } else {
+                elemento.style.display = "block";
+            }
+        }
+    </script>
 
 </body>
 </html>
