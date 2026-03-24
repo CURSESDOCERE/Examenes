@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Examen Unidad 1</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+body{font-family:Arial;background:#f4f4f4;text-align:center}
+.container{background:#fff;padding:20px;margin:20px auto;width:80%;border-radius:10px}
+.timer{font-size:20px;color:red}
+button{padding:10px 20px;margin-top:20px}
+</style>
+</head>
+<body>
+
+<div class="container" id="inicio">
+<h2>Examen Unidad 1 - Teoría Celular</h2>
+<input type="text" id="nombre" placeholder="Nombre"><br><br>
+<input type="text" id="cuenta" placeholder="Número de cuenta"><br><br>
+<button onclick="iniciarExamen()">Iniciar Examen</button>
+</div>
+
+<div class="container" id="examen" style="display:none">
+<div class="timer" id="timer"></div>
+<form id="formulario"></form>
+<button onclick="finalizarExamen()">Finalizar</button>
+</div>
+
+<div class="container" id="resultado" style="display:none"></div>
+
+<script>
+const preguntas = [
+"B","B","B","B","C","B","B","C","C","C","C","C","C","C","B","B","B","C","B","B","C","C","B","B","C"
+];
+
+const textos = [
+"La teoría celular establece que:",
+"¿Quiénes propusieron la teoría celular?",
+"¿Quién estableció que toda célula proviene de otra célula?",
+"¿Qué científico observó por primera vez células en el corcho?",
+"La célula es considerada unidad estructural porque:",
+"La célula es unidad funcional porque:",
+"¿Cuál es un postulado de la teoría celular?",
+"¿Cuál afirmación es correcta sobre las células?",
+"¿Qué característica comparten todas las células?",
+"¿Cuál es la función principal del ADN?",
+"Las células procariotas se caracterizan por:",
+"Las células eucariotas se caracterizan por:",
+"¿Cuál organismo es unicelular?",
+"El metabolismo celular ocurre en:",
+"La teoría celular moderna establece que:",
+"¿Qué instrumento permitió el descubrimiento de la célula?",
+"¿Quién perfeccionó el microscopio?",
+"¿Característica de todos los seres vivos?",
+"¿Qué estructura delimita la célula?",
+"¿Tipo de célula más simple?",
+"¿Qué tienen en común animal y vegetal?",
+"¿Cuál afirmación es incorrecta?",
+"¿Qué ocurre dentro de la célula?",
+"¿Importancia de la teoría celular?",
+"¿Base de la organización biológica?"
+];
+
+const opciones = [
+["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],
+["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],
+["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],
+["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],
+["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],["A","B","C","D"],["A","B","C","D"]
+];
+
+let tiempoTotal = 65 * preguntas.length;
+let intervalo;
+
+function iniciarExamen(){
+const nombre = document.getElementById('nombre').value;
+const cuenta = document.getElementById('cuenta').value;
+if(!nombre || !cuenta){alert("Completa tus datos"); return;}
+
+localStorage.setItem('nombre', nombre);
+localStorage.setItem('cuenta', cuenta);
+
+// generar preguntas
+let html = "";
+for(let i=0;i<textos.length;i++){
+html += `<p>${i+1}. ${textos[i]}</p>`;
+for(let op of opciones[i]){
+html += `<label><input type='radio' name='p${i}' value='${op}'> ${op}</label><br>`;
+}
+}
+
+document.getElementById('formulario').innerHTML = html;
+
+document.getElementById('inicio').style.display='none';
+document.getElementById('examen').style.display='block';
+
+iniciarTimer();
+}
+
+function iniciarTimer(){
+intervalo = setInterval(()=>{
+tiempoTotal--;
+let min = Math.floor(tiempoTotal/60);
+let seg = tiempoTotal%60;
+document.getElementById('timer').innerText = `Tiempo: ${min}:${seg<10?'0':''}${seg}`;
+
+if(tiempoTotal<=0){
+clearInterval(intervalo);
+finalizarExamen();
+}
+},1000);
+}
+
+function finalizarExamen(){
+clearInterval(intervalo);
+let aciertos = 0;
+let respuestasUsuario = [];
+
+for(let i=0;i<preguntas.length;i++){
+let r = document.querySelector(`input[name='p${i}']:checked`);
+let val = r ? r.value : "-";
+respuestasUsuario.push(val);
+if(val === preguntas[i]) aciertos++;
+}
+
+let calificacion = (aciertos/preguntas.length)*10;
+
+let nombre = localStorage.getItem('nombre');
+let cuenta = localStorage.getItem('cuenta');
+let fecha = new Date();
+
+let resultadoHTML = `
+<h2>Resultado</h2>
+<p>Nombre: ${nombre}</p>
+<p>Cuenta: ${cuenta}</p>
+<p>Fecha: ${fecha.toLocaleString()}</p>
+<p>Calificación: ${calificacion.toFixed(2)}</p>
+<button onclick='descargarPDF(${JSON.stringify(respuestasUsuario)}, ${calificacion})'>Descargar PDF</button>
+`;
+
+document.getElementById('examen').style.display='none';
+document.getElementById('resultado').style.display='block';
+document.getElementById('resultado').innerHTML = resultadoHTML;
+}
+
+function descargarPDF(respuestas, calificacion){
+const { jsPDF } = window.jspdf;
+const doc = new jsPDF();
+
+let nombre = localStorage.getItem('nombre');
+let cuenta = localStorage.getItem('cuenta');
+let fecha = new Date().toLocaleString();
+
+let y = 10;
+doc.text(`Nombre: ${nombre}`,10,y); y+=10;
+doc.text(`Cuenta: ${cuenta}`,10,y); y+=10;
+doc.text(`Fecha: ${fecha}`,10,y); y+=10;
+doc.text(`Calificación: ${calificacion.toFixed(2)}`,10,y); y+=10;
+
+for(let i=0;i<respuestas.length;i++){
+doc.text(`${i+1}. Respuesta: ${respuestas[i]}`,10,y);
+y+=8;
+if(y>280){doc.addPage(); y=10;}
+}
+
+doc.save('resultado_examen.pdf');
+}
+</script>
+
+</body>
+</html>
